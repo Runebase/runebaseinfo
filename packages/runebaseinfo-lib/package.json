@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-lib",
-  "version": "0.0.4",
+  "version": "0.0.1",
   "description": "A pure and powerful JavaScript RUNEBASE library",
   "main": "index.js",
   "keywords": [
