@@ -74,14 +74,14 @@ class Network {
 Network.add({
   name: 'livenet',
   alias: 'mainnet',
-  pubkeyhash: 0x3a,
-  privatekey: 0x80,
-  scripthash: 0x32,
-  xpubkey: 0x0488b21e,
-  xprivkey: 0x0488ade4,
+  pubkeyhash: 0x3c,
+  privatekey: 0xd8,
+  scripthash: 0x7b,
+  xpubkey: 0x0586c22e,
+  xprivkey: 0x0586dcf1,
   witness_v0_keyhash: 'qc',
-  networkMagic: 0xf1cfa6d3,
-  port: 3888,
+  networkMagic: 0xcff1d3a6,
+  port: 9947,
   dnsSeeds: []
 })
 let livenet = Network.get('livenet')
@@ -89,24 +89,24 @@ let livenet = Network.get('livenet')
 Network.add({
   name: 'testnet',
   alias: 'regtest',
-  pubkeyhash: 0x78,
-  privatekey: 0xef,
-  scripthash: 0x6e,
+  pubkeyhash: 0x0b,
+  privatekey: 0xe5,
+  scripthash: 0x6a,
   witness_v0_keyhash: 'tq',
-  xpubkey: 0x043587cf,
-  xprivkey: 0x04358394
+  xpubkey: 0x053782bf,
+  xprivkey: 0x053784a4
 })
 let testnet = Network.get('testnet')
 let TESTNET = {
-  PORT: 13888,
-  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0x0d221506),
+  PORT: 19947,
+  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0xacb2d52d),
   DNS_SEEDS: []
 }
 networkMaps.set(TESTNET.PORT, testnet)
 
 let REGTEST = {
-  PORT: 23888,
-  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0xfdddc6e1),
+  PORT: 29947,
+  NETWORK_MAGIC: BufferUtil.integerAsBuffer(0xaabdafd1),
   DNS_SEEDS: []
 }
 networkMaps.set(REGTEST.PORT, testnet)
