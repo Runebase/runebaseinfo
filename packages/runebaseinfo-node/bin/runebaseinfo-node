@@ -1,0 +1,7 @@
+#!/usr/bin/env node
+
+const runebaseinfo = require('../lib/cli/runebaseinfo')
+
+process.on('unhandledRejection', reason => console.error(reason))
+
+runebaseinfo()

@@ -1,0 +1,35 @@
+{
+  "name": "runebaseinfo-api",
+  "version": "0.0.1",
+  "description": "A RUNEBASE blockchain REST and websocket API service for Runebaseinfo Node",
+  "main": "index.js",
+  "runebaseinfoNode": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/runebase/runebaseinfo-api.git"
+  },
+  "keywords": [
+    "runebase",
+    "runebaseinfo",
+    "runebase explorer"
+  ],
+  "author": "RUNEBASE <foundation@runebase.org>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "bugs": {
+    "url": "https://github.com/runebase/runebaseinfo-api/issues"
+  },
+  "homepage": "https://github.com/runebase/runebaseinfo-api#readme",
+  "dependencies": {
+    "koa-bodyparser": "^4.2.0",
+    "koa-compress": "^3.0.0",
+    "koa-cors": "^0.0.16",
+    "koa-morgan": "^1.0.1",
+    "koa-router": "^7.4.0",
+    "lru-cache": "^4.1.2",
+    "runebaseinfo-lib": "^0.0.1",
+    "runebaseinfo-node": "^0.0.1"
+  }
+}

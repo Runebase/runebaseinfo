@@ -1,0 +1,14 @@
+{
+  "name": "runebaseinfo-rpc",
+  "version": "0.0.1",
+  "description": "Runebase Client Library to connect to Runebase Core via RPC",
+  "main": "index.js",
+  "keywords": [
+    "runebase",
+    "runebaseinfo",
+    "rpc"
+  ],
+  "repository": "https://github.com/runebase/runebaseinfo/tree/master/packages/runebaseinfo-rpc.git",
+  "author": "RUNEBASE <foundation@runebase.org>",
+  "license": "MIT"
+}

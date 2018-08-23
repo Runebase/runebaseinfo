@@ -1,7 +1,0 @@
-#!/usr/bin/env node
-
-const qtuminfo = require('../lib/cli/qtuminfo')
-
-process.on('unhandledRejection', reason => console.error(reason))
-
-qtuminfo()

@@ -1,0 +1,36 @@
+{
+  "version": "0.0.1",
+  "network": "livenet",
+  "port": 3001,
+  "services": [
+    "runebaseinfo-api",
+    "block",
+    "contract",
+    "header",
+    "mempool",
+    "transaction",
+    "web",
+    "db",
+    "header",
+    "p2p",
+    "address"
+  ],
+  "servicesConfig": {
+    "db": {
+      "rpc": {
+        "host": "127.0.0.1",
+        "port": "15126",
+        "user": "cpy",
+        "pass": "cpypwd",
+        "protocol": "http"
+      },
+      "mongodb": "mongodb://localhost/swartznet"
+    },
+    "p2p": {
+      "peers": [{"ip": {"v4":"127.0.0.1"}}],
+      "dnsSeed": false
+    }
+  },
+  "datadir": "/node/data"
+}
+

@@ -1,0 +1,34 @@
+{
+  "name": "runebaseinfo-lib",
+  "version": "0.0.1",
+  "description": "A pure and powerful JavaScript RUNEBASE library",
+  "main": "index.js",
+  "keywords": [
+    "runebase",
+    "transaction",
+    "address",
+    "p2p",
+    "ecies",
+    "cryptocurrency",
+    "blockchain",
+    "payment",
+    "bip21",
+    "bip32",
+    "bip37",
+    "bip69",
+    "bip70",
+    "multisig"
+  ],
+  "repository": "https://github.com/runebase/runebaseinfo/tree/master/runebaseinfo-lib",
+  "author": "RUNEBASE <foundation@runebase.org>",
+  "license": "MIT",
+  "dependencies": {
+    "bn.js": "^4.11.8",
+    "bs58": "^4.0.1",
+    "elliptic": "^6.4.0",
+    "ethereumjs-abi": "^0.6.5",
+    "ethjs-abi": "^0.2.1",
+    "lodash": "^4.17.10",
+    "runebase-opcodes": "^1.0.0"
+  }
+}
