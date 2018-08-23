@@ -1,5 +1,5 @@
 {
-  "name": "qtuminfo",
+  "name": "runebaseinfo",
   "private": true,
   "version": "0.0.1",
   "description": "",
@@ -9,19 +9,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qtumproject/qtuminfo.git"
+    "url": "git+https://github.com/runebase/runebaseinfo.git"
   },
   "keywords": [
-    "qtum",
-    "qtuminfo",
-    "qtum explorer"
+    "runebase",
+    "runebaseinfo",
+    "runebase explorer"
   ],
-  "author": "QTUM <foundation@qtum.org>",
+  "author": "RUNEBASE <foundation@runebase.org>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/qtumproject/qtuminfo/issues"
+    "url": "https://github.com/runebase/runebaseinfo/issues"
   },
-  "homepage": "https://github.com/qtumproject/qtuminfo#readme",
+  "homepage": "https://github.com/runebase/runebaseinfo#readme",
   "devDependencies": {
     "babel-eslint": "^8.2.6",
     "eslint": "^4.19.1",
