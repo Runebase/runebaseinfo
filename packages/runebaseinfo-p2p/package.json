@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-p2p",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Interface to the runebase P2P network for runebaseinfo",
   "main": "index.js",
   "keywords": [
@@ -12,7 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "bloom-filter": "^0.2.0",
-    "runebaseinfo-lib": "^0.0.3",
+    "runebaseinfo-lib": "^0.0.4",
     "socks5-client": "^1.2.6"
   }
 }

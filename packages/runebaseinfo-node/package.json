@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-node",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Full node with extended capabilities using Runebasecore and Runebasecoin Core",
   "main": "index.js",
   "bin": {
@@ -37,8 +37,8 @@
     "mkdirp": "^0.5.1",
     "mongoose": "^5.0.16",
     "mongoose-long": "^0.2.0",
-    "runebaseinfo-lib": "^0.0.3",
-    "runebaseinfo-p2p": "^0.0.3",
+    "runebaseinfo-lib": "^0.0.4",
+    "runebaseinfo-p2p": "^0.0.4",
     "runebaseinfo-rpc": "^0.0.1",
     "socket.io": "^2.1.0",
     "socket.io-client": "^2.1.0"
