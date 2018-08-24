@@ -19,7 +19,7 @@
     "db": {
       "rpc": {
         "host": "127.0.0.1",
-        "port": "15126",
+        "port": "9432",
         "user": "cpy",
         "pass": "cpypwd",
         "protocol": "http"
