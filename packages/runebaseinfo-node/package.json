@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "bin": {
     "runebaseinfo-node": "./bin/runebaseinfo-node.js"
   },
@@ -22,8 +22,8 @@
     "lru-cache": "^4.1.3",
     "mongoose": "^5.2.8",
     "mongoose-long": "^0.2.1",
-    "runebaseinfo-lib": "^0.0.1",
-    "runebaseinfo-p2p": "^0.0.1",
+    "runebaseinfo-lib": "^0.0.2",
+    "runebaseinfo-p2p": "^0.0.2",
     "runebaseinfo-rpc": "^0.0.1",
     "socket.io": "^2.1.1"
   }

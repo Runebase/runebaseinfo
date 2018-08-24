@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A RUNEBASE blockchain REST and websocket API service for Runebaseinfo Node",
   "main": "index.js",
   "repository": "https://github.com/runebase/runebaseinfo/tree/master/runebaseinfo-api",
@@ -16,7 +16,7 @@
     "koa-cors": "^0.0.16",
     "koa-morgan": "^1.0.1",
     "koa-router": "^7.4.0",
-    "runebaseinfo-lib": "^0.0.1",
-    "runebaseinfo-node": "^0.0.1"
+    "runebaseinfo-lib": "^0.0.2",
+    "runebaseinfo-node": "^0.0.2"
   }
 }

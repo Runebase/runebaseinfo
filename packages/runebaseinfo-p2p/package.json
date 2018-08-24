@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-p2p",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Interface to the runebase P2P network for runebaseinfo",
   "main": "lib/index.mjs",
   "keywords": [
@@ -11,6 +11,6 @@
   "author": "RUNEBASE <foundation@runebase.org>",
   "license": "MIT",
   "dependencies": {
-    "runebaseinfo-lib": "^0.0.1"
+    "runebaseinfo-lib": "^0.0.2"
   }
 }
