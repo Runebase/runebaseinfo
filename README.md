@@ -45,6 +45,7 @@ make -j2
 ```
 git clone https://github.com/runebase/runebaseinfo
 cd runebaseinfo
+git checkout legacy-v0.0
 npm i
 npm i runebaseinfo-node
 npm i runebaseinfo-api
