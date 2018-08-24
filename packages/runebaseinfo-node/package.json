@@ -1,6 +1,6 @@
 {
   "name": "runebaseinfo-node",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Full node with extended capabilities using Runebasecore and Runebasecoin Core",
   "main": "index.js",
   "bin": {
