@@ -19,7 +19,7 @@
       "rpc": {
         "protocol": "http",
         "host": "localhost",
-        "port": 3889,
+        "port": 9432,
         "user": "user",
         "password": "password"
       }
@@ -30,7 +30,7 @@
           "ip": {
             "v4": "127.0.0.1"
           },
-          "port": 3888
+          "port": 9947
         }
       ]
     },
