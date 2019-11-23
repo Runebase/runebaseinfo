@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runebaseproject/runebaseinfo.git"
+    "url": "git+https://github.com/runebase/runebaseinfo.git"
   },
   "keywords": [
     "runebase",
     "runebaseinfo",
     "runebase explorer"
   ],
-  "author": "RUNEBASE <foundation@runebase.org>",
+  "author": "QTUM <foundation@qtum.org>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/runebaseproject/runebaseinfo/issues"
