@@ -16,7 +16,7 @@ class Logger {
   }
 
   debug(...args) {
-    if (process.env.QTUMINFO_ENV === 'debug') {
+    if (process.env.RUNEBASEINFO_ENV === 'debug') {
       this._log('green', 'debug', ...args)
     }
   }

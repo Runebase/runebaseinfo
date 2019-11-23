@@ -1,27 +1,27 @@
 {
-  "name": "qtuminfo",
+  "name": "runebaseinfo",
   "private": true,
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "dev": "bin/qtuminfo-node.js start",
+    "dev": "bin/runebaseinfo-node.js start",
     "lint": "eslint --ext .js . --ignore-path .gitignore"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/qtumproject/qtuminfo.git"
+    "url": "git+https://github.com/runebaseproject/runebaseinfo.git"
   },
   "keywords": [
-    "qtum",
-    "qtuminfo",
-    "qtum explorer"
+    "runebase",
+    "runebaseinfo",
+    "runebase explorer"
   ],
-  "author": "QTUM <foundation@qtum.org>",
+  "author": "RUNEBASE <foundation@runebase.org>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/qtumproject/qtuminfo/issues"
+    "url": "https://github.com/runebaseproject/runebaseinfo/issues"
   },
-  "homepage": "https://github.com/qtumproject/qtuminfo#readme",
+  "homepage": "https://github.com/runebaseproject/runebaseinfo#readme",
   "devDependencies": {
     "babel-eslint": "^10.0.3",
     "eslint": "^6.4.0"
