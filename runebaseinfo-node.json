@@ -14,12 +14,12 @@
   "servicesConfig": {
     "db": {
       "mysql": {
-        "uri": "mysql://runebaseinfo:runebaseinfo@localhost/runebaseinfo"
+        "uri": "mysql://runebaseinfo:Runebaseinfo1%21@localhost/runebaseinfo"
       },
       "rpc": {
         "protocol": "http",
         "host": "localhost",
-        "port": 9947,
+        "port": 9948,
         "user": "runebaseinfo",
         "password": "runebaseinfo"
       }
@@ -30,7 +30,7 @@
           "ip": {
             "v4": "127.0.0.1"
           },
-          "port": 9432
+          "port": 9433
         }
       ]
     },

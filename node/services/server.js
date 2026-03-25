@@ -1,10 +1,12 @@
-const socketio = require('socket.io')
+const http = require('http')
+const { Server: SocketIOServer } = require('socket.io')
 const Service = require('./base')
 
 class ServerService extends Service {
   #options = null
   #bus = null
   #io = null
+  #httpServer = null
 
   constructor(options) {
     super(options)
@@ -24,12 +26,22 @@ class ServerService extends Service {
     this.#bus.on('mempool/transaction', this._onMempoolTransaction.bind(this))
     this.#bus.subscribe('mempool/transaction')
 
-    this.#io = socketio(this.#options.port || 3001, {serveClient: false})
+    const port = this.#options.port || 3001
+    this.#httpServer = http.createServer()
+    this.#io = new SocketIOServer(this.#httpServer, {
+      serveClient: false,
+      cors: {
+        origin: '*',
+        methods: ['GET', 'POST']
+      }
+    })
     this.#io.on('connection', this._onConnection.bind(this))
+    this.#httpServer.listen(port)
   }
 
   async stop() {
     this.#io.close()
+    this.#httpServer.close()
   }
 
   _onConnection(socket) {
@@ -37,15 +49,15 @@ class ServerService extends Service {
   }
 
   _onBlock(block) {
-    this.#io.sockets.emit('block', {hash: block.hash, height: block.height})
+    this.#io.emit('block', {hash: block.hash, height: block.height})
   }
 
   _onReorg(block) {
-    this.#io.sockets.emit('reorg', {hash: block.hash, height: block.height})
+    this.#io.emit('reorg', {hash: block.hash, height: block.height})
   }
 
   _onMempoolTransaction(transaction) {
-    this.#io.sockets.emit('mempool-transaction', transaction.id)
+    this.#io.emit('mempool-transaction', transaction.id)
   }
 }
 
