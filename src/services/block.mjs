@@ -311,7 +311,7 @@ class BlockService extends Service {
 
   async _processReorg(blocksToRemove) {
     for (let block of blocksToRemove) {
-      this.#recentBlockHashes.del(block.hash.toString('hex'))
+      this.#recentBlockHashes.delete(block.hash.toString('hex'))
     }
     await this._onReorg(blocksToRemove)
     this.logger.info('Block Service: removed', blocksToRemove.length, 'blocks(s) during the reorganization event')
