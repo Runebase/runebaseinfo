@@ -1,13 +1,13 @@
-# runebaseinfo
+# runebase-explorer-daemon
 
 Blockchain indexer for the Runebase network. Syncs with a Runebase Core node via P2P and RPC, indexes blocks, transactions, contracts, and QRC20/QRC721 tokens into MySQL.
 
-runebaseinfo is split into 3 repos:
-- [runebaseinfo](https://github.com/runebase/runebaseinfo) (this repo) - blockchain indexer
-- [runebaseinfo-api](https://github.com/runebase/runebaseinfo-api) - REST API
-- [runebaseinfo-ui](https://github.com/runebase/runebaseinfo-ui) - web frontend
+runebase-explorer-daemon is split into 3 repos:
+- [runebase-explorer-daemon](https://github.com/runebase/runebase-explorer-daemon) (this repo) - blockchain indexer
+- [runebase-explorer-api](https://github.com/runebase/runebase-explorer-api) - REST API
+- [runebase-explorer-ui](https://github.com/runebase/runebase-explorer-ui) - web frontend
 
-[API documentation](https://github.com/runebase/runebaseinfo-api/blob/master/README.md)
+[API documentation](https://github.com/runebase/runebase-explorer-api/blob/master/README.md)
 
 ## Prerequisites
 
@@ -18,26 +18,26 @@ runebaseinfo is split into 3 repos:
 
 ## Deploy Runebase Core
 
-1. `git clone --recursive https://github.com/runebase/runebase.git --branch=runebaseinfo`
+1. `git clone --recursive https://github.com/runebase/runebase.git --branch=runebase-explorer-daemon`
 2. Follow the [build instructions](https://github.com/runebase/runebase/blob/master/README.md#building-runebase-core)
 3. Run `runebased` with `-logevents=1` enabled
 
-## Deploy runebaseinfo
+## Deploy runebase-explorer-daemon
 
 ### 1. Clone and install
 
 ```bash
-git clone https://github.com/runebase/runebaseinfo.git
-cd runebaseinfo
+git clone https://github.com/runebase/runebase-explorer-daemon.git
+cd runebase-explorer-daemon
 npm install
 ```
 
 ### 2. Create MySQL database
 
 ```bash
-mysql -u root -p -e "CREATE DATABASE runebaseinfo;"
-mysql -u root -p -e "CREATE USER 'runebaseinfo'@'localhost' IDENTIFIED BY 'your_password';"
-mysql -u root -p -e "GRANT ALL PRIVILEGES ON runebaseinfo.* TO 'runebaseinfo'@'localhost';"
+mysql -u root -p -e "CREATE DATABASE runebase_explorer;"
+mysql -u root -p -e "CREATE USER 'runebase_explorer'@'localhost' IDENTIFIED BY 'your_password';"
+mysql -u root -p -e "GRANT ALL PRIVILEGES ON runebase_explorer.* TO 'runebase_explorer'@'localhost';"
 ```
 
 ### 3. Configure environment
@@ -55,8 +55,8 @@ Edit `.env`:
 CHAIN=mainnet
 
 # Database
-DB_NAME=runebaseinfo
-DB_USER=runebaseinfo
+DB_NAME=runebase_explorer
+DB_USER=runebase_explorer
 DB_PASS=your_password
 DB_HOST=localhost
 DB_PORT=3306
@@ -65,8 +65,8 @@ DB_PORT=3306
 RPC_PROTOCOL=http
 RPC_HOST=localhost
 RPC_PORT=9948
-RPC_USER=runebaseinfo
-RPC_PASS=runebaseinfo
+RPC_USER=runebase_explorer
+RPC_PASS=runebase_explorer
 
 # P2P
 P2P_PORT=9433
@@ -94,12 +94,12 @@ npm run build
 npm start
 ```
 
-It is strongly recommended to run `runebaseinfo` under a process manager (like `pm2`):
+It is strongly recommended to run `runebase-explorer-daemon` under a process manager (like `pm2`):
 
 ```bash
 npm install -g pm2
 npm run build
-pm2 start dist/index.mjs --name runebaseinfo --interpreter node --node-args="--experimental-specifier-resolution=node" -- start
+pm2 start dist/index.mjs --name runebase-explorer-daemon --interpreter node --node-args="--experimental-specifier-resolution=node" -- start
 ```
 
 ## Environment Variables
@@ -107,7 +107,7 @@ pm2 start dist/index.mjs --name runebaseinfo --interpreter node --node-args="--e
 | Variable | Default | Description |
 |---|---|---|
 | `CHAIN` | `mainnet` | Blockchain network (`mainnet` or `testnet`) |
-| `DB_NAME` | `runebaseinfo` | MySQL database name |
+| `DB_NAME` | `runebase_explorer` | MySQL database name |
 | `DB_USER` | `root` | MySQL username |
 | `DB_PASS` | (empty) | MySQL password |
 | `DB_HOST` | `localhost` | MySQL host |
@@ -135,10 +135,10 @@ npm run db:migrate:undo
 npm run db:migrate:status
 ```
 
-## Deploy runebaseinfo-api
+## Deploy runebase-explorer-api
 
-1. `git clone https://github.com/runebase/runebaseinfo-api.git`
-2. `cd runebaseinfo-api && npm install`
+1. `git clone https://github.com/runebase/runebase-explorer-api.git`
+2. `cd runebase-explorer-api && npm install`
 3. Create file `config/config.prod.js` with your configuration:
     ```javascript
     exports.security = {
@@ -151,14 +151,14 @@ npm run db:migrate:status
     ```
 4. `npm start`
 
-## Deploy runebaseinfo-ui
+## Deploy runebase-explorer-ui
 
 This repo is optional — you may skip it if you don't need a web UI.
 
-1. `git clone https://github.com/runebase/runebaseinfo-ui.git`
-2. `cd runebaseinfo-ui && npm install`
+1. `git clone https://github.com/runebase/runebase-explorer-ui.git`
+2. `cd runebase-explorer-ui && npm install`
 3. Edit `package.json`:
-   - Set `script.build` to: `"build": "RUNEBASEINFO_API_BASE_CLIENT=/api/ RUNEBASEINFO_API_BASE_SERVER=http://localhost:3001/ RUNEBASEINFO_API_BASE_WS=//example.com/ nuxt build"`
+   - Set `script.build` to: `"build": "RUNEBASE_EXPLORER_API_BASE_CLIENT=/api/ RUNEBASE_EXPLORER_API_BASE_SERVER=http://localhost:3001/ RUNEBASE_EXPLORER_API_BASE_WS=//example.com/ nuxt build"`
    - Set `script.start` to: `"start": "PORT=3000 nuxt start"`
 4. `npm run build`
 5. `npm start`

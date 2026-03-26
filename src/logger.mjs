@@ -16,7 +16,7 @@ class Logger {
   }
 
   debug(...args) {
-    if (process.env.RUNEBASEINFO_ENV === 'debug') {
+    if (process.env.RUNEBASE_EXPLORER_DAEMON_ENV === 'debug') {
       this._log('green', 'debug', ...args)
     }
   }

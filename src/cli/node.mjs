@@ -39,7 +39,7 @@ class RunebaseNode {
       services
     })
     this.registerExitHandlers()
-    this.#node.on('ready', () => this.logger.info('Runebaseinfo Node ready.'))
+    this.#node.on('ready', () => this.logger.info('Runebase Explorer Node ready.'))
     this.#node.on('error', err => this.logger.error(err))
     this.#node.start().catch(err => {
       this.logger.error('Failed to start services')

@@ -1,5 +1,5 @@
 {
-  "name": "runebaseinfo",
+  "name": "runebase-explorer-daemon",
   "private": true,
   "version": "0.0.1",
   "description": "Blockchain indexer for the Runebase network",
@@ -19,19 +19,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/runebase/runebaseinfo.git"
+    "url": "git+https://github.com/runebase/runebase-explorer-daemon.git"
   },
   "keywords": [
     "runebase",
-    "runebaseinfo",
+    "runebase-explorer-daemon",
     "runebase explorer"
   ],
   "author": "RUNEBASE <foundation@runebase.org>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/runebase/runebaseinfo/issues"
+    "url": "https://github.com/runebase/runebase-explorer-daemon/issues"
   },
-  "homepage": "https://github.com/runebase/runebaseinfo#readme",
+  "homepage": "https://github.com/runebase/runebase-explorer-daemon#readme",
   "devDependencies": {
     "@babel/cli": "^7.28.6",
     "@babel/core": "^7.29.0",
