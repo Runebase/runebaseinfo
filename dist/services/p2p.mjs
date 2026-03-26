@@ -73,8 +73,13 @@ class P2PService extends Service {
     this.#peer.sendMessage(this.#messages.mempool());
   }
   async sendRawTransaction(data) {
-    let id = await this.node.getRpcClient().sendrawtransaction(data.toString('hex'));
-    return Buffer.from(id, 'hex');
+    try {
+      let id = await this.node.getRpcClient().sendrawtransaction(data.toString('hex'));
+      return Buffer.from(id, 'hex');
+    } catch (err) {
+      this.logger.error('P2P Service: sendRawTransaction failed:', err.message);
+      throw err;
+    }
   }
   async start() {
     this._initCache();

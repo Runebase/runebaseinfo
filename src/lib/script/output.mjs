@@ -200,7 +200,13 @@ class MultisigOutputScript extends OutputScript {
 
   static isValid(chunks) {
     return chunks.length > 3 && new Opcode(chunks[0].code).isSmallInt()
-      && chunks.slice(1, -2).every(chunk => chunk.buffer && secp256k1.publicKeyVerify(chunk.buffer))
+      && chunks.slice(1, -2).every(chunk => {
+        try {
+          return chunk.buffer && secp256k1.publicKeyVerify(chunk.buffer)
+        } catch {
+          return false
+        }
+      })
       && new Opcode(chunks[chunks.length - 2].code).toSmallInt() === chunks.length - 3
       && chunks[chunks.length - 1].code === Opcode.OP_CHECKMULTISIG
   }

@@ -33,6 +33,20 @@ const loggers = {
 const config = {
   logger: 'normal'
 };
+const RETRY_ERRORS = new Set(['ECONNREFUSED', 'ECONNRESET', 'ETIMEDOUT', 'ENOTFOUND', 'EPIPE', 'EHOSTUNREACH', 'ENETUNREACH', 'EAI_AGAIN']);
+const MAX_RETRIES = 60;
+const BASE_DELAY = 2000;
+const MAX_DELAY = 30000;
+function isRetryableError(err) {
+  if (err && RETRY_ERRORS.has(err.code)) {
+    return true;
+  }
+  let msg = err && err.message || '';
+  return msg.includes('ECONNREFUSED') || msg.includes('ECONNRESET') || msg.includes('ETIMEDOUT') || msg.includes('socket hang up');
+}
+function retryDelay(attempt) {
+  return Math.min(BASE_DELAY * Math.pow(1.5, attempt), MAX_DELAY);
+}
 class RpcClient {
   #host = '127.0.0.1';
   #port = 3889;
@@ -120,11 +134,26 @@ class RpcClient {
       req.end();
     });
   }
+  async rpcWithRetry(request) {
+    for (let attempt = 0;; ++attempt) {
+      try {
+        return await this.rpc(request);
+      } catch (err) {
+        if (attempt < MAX_RETRIES && isRetryableError(err)) {
+          let delay = retryDelay(attempt);
+          this.#log.warn(`Runebase JSON-RPC: connection failed (${err.code || err.message}), retrying in ${Math.round(delay / 1000)}s (attempt ${attempt + 1}/${MAX_RETRIES})...`);
+          await new Promise(resolve => setTimeout(resolve, delay));
+        } else {
+          throw err;
+        }
+      }
+    }
+  }
   async batch(batchCallback) {
     this.batchedCalls = [];
     batchCallback();
     try {
-      return await this.rpc(this.batchedCalls);
+      return await this.rpcWithRetry(this.batchedCalls);
     } finally {
       this.batchedCalls = null;
     }
@@ -161,7 +190,7 @@ function generateRPCMethods() {
           id: getRandomId()
         });
       } else {
-        return this.rpc({
+        return this.rpcWithRetry({
           method: methodName,
           params: args,
           id: getRandomId()

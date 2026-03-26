@@ -55,6 +55,13 @@ class RunebaseNode {
       this.#shuttingDown = true
       this.#node.stop()
     } else if (err) {
+      let msg = err && err.message || ''
+      let isRpcError = msg.includes('ECONNREFUSED') || msg.includes('ECONNRESET')
+        || msg.includes('ETIMEDOUT') || msg.includes('socket hang up')
+      if (isRpcError) {
+        this.logger.warn('RPC connection error (node may be down):', msg)
+        return
+      }
       this.logger.error('Uncaught exception:', err)
       if (err.stack) {
         this.logger.error(err.stack)

@@ -291,7 +291,13 @@ class ContractService extends Service {
     this.logger.info('Contract Service: balance and supply reconciliation complete');
   }
   async _syncContracts() {
-    let result = await this.node.getRpcClient().listcontracts(1, 1e8);
+    let result;
+    try {
+      result = await this.node.getRpcClient().listcontracts(1, 1e8);
+    } catch (err) {
+      this.logger.error('Contract Service: failed to sync contracts from RPC:', err.message);
+      return;
+    }
     let contractsToCreate = new Set(Object.keys(result));
     let originalContracts = (await this.#Contract.findAll({
       where: {},
