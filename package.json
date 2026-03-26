@@ -13,9 +13,9 @@
     "db:migrate": "sequelize-cli db:migrate",
     "db:migrate:undo": "sequelize-cli db:migrate:undo",
     "db:migrate:status": "sequelize-cli db:migrate:status",
-    "release:patch": "npm version patch -m 'chore(release): bump to v%s' && npm run build",
-    "release:minor": "npm version minor -m 'chore(release): bump to v%s' && npm run build",
-    "release:major": "npm version major -m 'chore(release): bump to v%s' && npm run build"
+    "release:patch": "npm version patch -m 'chore(release): bump to v%s' && npm run build && git add dist/ && git commit -m \"chore(build): release\" --no-verify",
+    "release:minor": "npm version minor -m 'chore(release): bump to v%s' && npm run build && git add dist/ && git commit -m \"chore(build): release\" --no-verify",
+    "release:major": "npm version major -m 'chore(release): bump to v%s' && npm run build && git add dist/ && git commit -m \"chore(build): release\" --no-verify"
   },
   "repository": {
     "type": "git",

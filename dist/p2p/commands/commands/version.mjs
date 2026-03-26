@@ -9,7 +9,7 @@ class VersionMessage extends Message {
     services = 13n,
     nonce = getNonce(),
     timestamp = Math.floor(Date.now() / 1000),
-    subversion = `/runebaseinfo:${packageInfo.version}/`,
+    subversion = `/runebase-explorer-daemon:${packageInfo.version}/`,
     startHeight = 0,
     relay = true,
     ...options

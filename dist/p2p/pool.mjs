@@ -64,7 +64,7 @@ class Pool extends EventEmitter {
   }
   fillConnections() {
     for (let address of this.#addresses) {
-      if (this.#connectedPeers.length >= this.#maxSize) {
+      if (this.#connectedPeers.size >= this.#maxSize) {
         break;
       }
       if (!address.retryTime || Math.floor(Date.now() / 1000) > address.retryTime) {

@@ -43,7 +43,7 @@ class BlockService extends Service {
     this.#recentBlockHashes = new LRUCache({
       max: this.#recentBlockHashesCount
     });
-    this.#readAheadBlockCount = options.readAheadBlockCount || 2;
+    this.#readAheadBlockCount = options.readAheadBlockCount || 20;
     this.#pauseSync = options.pause;
     this.#reorgToBlock = options.reorgToBlock;
   }

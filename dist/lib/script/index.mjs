@@ -55,7 +55,7 @@ class Script {
           });
         }
       }
-    } catch (err) {
+    } catch {
       throw new InvalidScriptError();
     }
     return chunks;

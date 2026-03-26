@@ -1,6 +1,4 @@
 import Sequelize from 'sequelize';
-
-/* eslint-disable camelcase */
 const addressTypes = {
   pubkeyhash: 1,
   scripthash: 2,
@@ -10,7 +8,6 @@ const addressTypes = {
   evm_contract: 0x81,
   x86_contract: 0x82
 };
-/* eslint-enable camelcase*/
 const addressTypeMap = {
   1: 'pubkeyhash',
   2: 'scripthash',

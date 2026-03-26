@@ -85,6 +85,12 @@ class DBService extends Service {
         supportBigNumbers: true,
         bigNumberStrings: true
       },
+      pool: {
+        min: 5,
+        max: 20,
+        acquire: 60000,
+        idle: 10000
+      },
       logging: false
     });
     generateTip(this.#sequelize);
