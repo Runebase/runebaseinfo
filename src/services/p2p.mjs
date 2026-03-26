@@ -18,7 +18,7 @@ class P2PService extends Service {
     super(options)
     this._initP2P()
     this._initPubSub()
-    this.#blockCache = new LRUCache({max: 10, ttl: 5 * 60 * 1000})
+    this.#blockCache = new LRUCache({max: 32, ttl: 5 * 60 * 1000})
   }
 
   static get dependencies() {

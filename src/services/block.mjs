@@ -37,7 +37,7 @@ class BlockService extends Service {
     this.#header = this.node.services.get('header')
     this.#recentBlockHashesCount = options.recentBlockHashesCount || 144
     this.#recentBlockHashes = new LRUCache({max: this.#recentBlockHashesCount})
-    this.#readAheadBlockCount = options.readAheadBlockCount || 2
+    this.#readAheadBlockCount = options.readAheadBlockCount || 20
     this.#pauseSync = options.pause
     this.#reorgToBlock = options.reorgToBlock
   }

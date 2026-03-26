@@ -105,7 +105,7 @@ class ContractService extends Service {
             ]
           })
           let contract = await this._createContract(address, 'evm')
-          if (contract && contract.type === 'qrc20') {
+          if (contract && contract.type === 'qrc20' && this.node.isSynced()) {
             await this._updateBalances(new Set([`${address.toString('hex')}:${owner.data.toString('hex')}`]))
           }
         } else if (output.scriptPubKey.type === OutputScript.EVM_CONTRACT_CREATE_SENDER) {
@@ -122,7 +122,7 @@ class ContractService extends Service {
             chain: this.chain
           })
           let contract = await this._createContract(address, 'evm')
-          if (contract && contract.type === 'qrc20') {
+          if (contract && contract.type === 'qrc20' && this.node.isSynced()) {
             await this._updateBalances(new Set([`${address.toString('hex')}:${owner.data.toString('hex')}`]))
           }
         }
@@ -177,6 +177,74 @@ class ContractService extends Service {
 
   async onSynced() {
     await this._syncContracts()
+    await this._reconcileBalancesAndSupply()
+  }
+
+  async _reconcileBalancesAndSupply() {
+    this.logger.info('Contract Service: reconciling QRC20 balances and total supplies...')
+    let balanceChanges = new Set()
+    let pageSize = 10000
+    let lastId = 0
+    for (;;) {
+      let logs = await this.#EVMReceiptLog.findAll({
+        where: {
+          _id: {[$gt]: lastId},
+          topic1: TransferABI.id,
+          topic3: {[$ne]: null},
+          topic4: null
+        },
+        attributes: ['_id', 'address', 'topic2', 'topic3'],
+        order: [['_id', 'ASC']],
+        limit: pageSize
+      })
+      if (logs.length === 0) {
+        break
+      }
+      for (let {address, topic2, topic3} of logs) {
+        if (Buffer.compare(topic2, Buffer.alloc(32)) !== 0) {
+          balanceChanges.add(`${address.toString('hex')}:${topic2.slice(12).toString('hex')}`)
+        }
+        if (Buffer.compare(topic3, Buffer.alloc(32)) !== 0) {
+          balanceChanges.add(`${address.toString('hex')}:${topic3.slice(12).toString('hex')}`)
+        }
+      }
+      lastId = logs[logs.length - 1]._id
+      if (logs.length < pageSize) {
+        break
+      }
+    }
+    if (balanceChanges.size) {
+      this.logger.info('Contract Service: updating', balanceChanges.size, 'QRC20 balances...')
+      let batch = new Set()
+      let batchSize = 200
+      for (let item of balanceChanges) {
+        batch.add(item)
+        if (batch.size >= batchSize) {
+          await this._updateBalances(batch)
+          batch.clear()
+        }
+      }
+      if (batch.size) {
+        await this._updateBalances(batch)
+      }
+    }
+    let tokenContracts = await this.#Contract.findAll({
+      where: {type: {[$in]: ['qrc20', 'qrc721']}},
+      attributes: ['address', 'type']
+    })
+    for (let contract of tokenContracts) {
+      try {
+        let totalSupply = BigInt((await this._callMethod(contract.address, totalSupplyABI)).toString())
+        if (contract.type === 'qrc20') {
+          await this.#QRC20.update({totalSupply}, {where: {contractAddress: contract.address}})
+        } else {
+          await this.#QRC721.update({totalSupply}, {where: {contractAddress: contract.address}})
+        }
+      } catch {
+        continue
+      }
+    }
+    this.logger.info('Contract Service: balance and supply reconciliation complete')
   }
 
   async _syncContracts() {
@@ -362,11 +430,14 @@ class ContractService extends Service {
         }
       }
     }
-    if (balanceChanges.size) {
-      await this._updateBalances(balanceChanges)
-    }
     if (tokenHolders.size) {
       await this._updateTokenHolders(tokenHolders)
+    }
+    if (!this.node.isSynced()) {
+      return
+    }
+    if (balanceChanges.size) {
+      await this._updateBalances(balanceChanges)
     }
     for (let addressString of totalSupplyChanges) {
       let address = Buffer.from(addressString, 'hex')

@@ -1,6 +1,9 @@
 import http from 'http'
 import https from 'https'
 
+const httpAgent = new http.Agent({keepAlive: true, maxSockets: 10})
+const httpsAgent = new https.Agent({keepAlive: true, maxSockets: 10})
+
 const cl = console.log.bind(console)
 function noop() {}
 
@@ -18,6 +21,7 @@ class RpcClient {
   #user = 'user'
   #password = 'password'
   #protocol = null
+  #keepAliveAgent = null
   batchedCalls = null
   #disableAgent = false
   #log = null
@@ -35,6 +39,7 @@ class RpcClient {
     this.#user = user
     this.#password = password
     this.#protocol = protocol === 'http' ? http : https
+    this.#keepAliveAgent = protocol === 'http' ? httpAgent : httpsAgent
     this.#disableAgent = disableAgent
     this.#log = config.log || loggers[config.logger || 'normal']
   }
@@ -48,7 +53,7 @@ class RpcClient {
       method: 'POST',
       path: '/',
       rejectUnauthorized: this.rejectUnauthorized,
-      agent: this.#disableAgent ? false : undefined
+      agent: this.#disableAgent ? false : this.#keepAliveAgent
     }
     if (this.httpOptions) {
       Object.assign(options, this.httpOptions)
