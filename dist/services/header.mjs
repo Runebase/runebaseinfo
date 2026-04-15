@@ -156,8 +156,15 @@ class HeaderService extends Service {
           signature: header.signature
         }));
         for (let header of transformedHeaders) {
-          if (this.#lastHeader.height > 5000) {
-            assert(Buffer.compare(this.#lastHeader.hash, header.prevHash) === 0, `headers not in order: ${this.#lastHeader.hash.toString('hex')}' -and- ${header.prevHash.toString('hex')},`, `last header at height: ${this.#lastHeader.height}`);
+          if (this.#lastHeader.height > 5000 && Buffer.compare(this.#lastHeader.hash, header.prevHash) !== 0) {
+            this.logger.warn(`Header Service: headers not in order at height ${this.#lastHeader.height}:`, `${this.#lastHeader.hash.toString('hex')} -and- ${header.prevHash.toString('hex')};`, 'treating as reorg');
+            this.#reorging = true;
+            this.emit('reorg');
+            this._adjustTipBackToCheckpoint();
+            await this._adjustHeadersForCheckpointTip();
+            this._removeAllSubscriptions();
+            this._startSync();
+            return;
           }
           this._onHeader(header);
         }
